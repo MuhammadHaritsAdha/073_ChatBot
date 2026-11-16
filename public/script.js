@@ -14,3 +14,18 @@ function addMessage(sender, text) {
     chatBox.scrollTop = chatBox.scrollHeight;
     return content;
 }
+
+chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const message = userInput.value.trim();
+    if (!message) return;
+
+    addMessage('user', message);
+    messages.push({ role: 'user', content: message });
+    
+    userInput.value = '';
+    userInput.disabled = true;
+    const button = chatForm.querySelector("button");
+    button.disabled = true;
+    button.textContent = "Menunggu...";
+});
